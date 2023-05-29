@@ -1,3 +1,3 @@
-# types
+# @MapColonies/types
 
 TBD
