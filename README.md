@@ -6,7 +6,7 @@ this package provides common Map-Colonies types
 ## Installation
 
 ``` 
-$ npm install @turf/turf
+$ npm install @map-colonies/types
 ```
 
 ### Usage
