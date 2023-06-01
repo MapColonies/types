@@ -1,5 +1,7 @@
-export enum EPSG {
-  EPSG4326 = 'EPSG:4326',
-  EPSG3857 = 'EPSG:3857',
-  UTM = 'UTM',
-}
+import * as epsg_all from '../../../node_modules/epsg-index/all.json';
+import { EpsgCode } from './GENERATED/epsg_codes_type';
+import { Epsg } from './GENERATED/epsg_interface';
+
+export * from './GENERATED/epsg_interface';
+export * from './GENERATED/epsg_codes_type';
+export const EPSGDATA = epsg_all as unknown as Record<EpsgCode, Epsg>;
