@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable naming-convention  */
 export interface Epsg {
   code: string;
   kind: Kind;
@@ -44,4 +44,4 @@ export enum Unit {
   USSurveyFoot = 'US survey foot',
 }
 
-/* eslint-enable @typescript-eslint/naming-convention */
+/* eslint-disable naming-convention  */
