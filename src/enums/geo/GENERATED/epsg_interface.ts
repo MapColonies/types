@@ -1,3 +1,4 @@
+/* eslint-disable */
 export interface Epsg {
   code: string;
   kind: Kind;
