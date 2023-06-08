@@ -1,7 +1,7 @@
 {
-  "name": "@map-colonies/ts-npm-package-boilerplate",
-  "version": "1.0.2",
-  "description": "This is template for map colonies typescript packages",
+  "name": "@map-colonies/types",
+  "version": "1.0.0",
+  "description": "MapColonies types package",
   "main": "./dist/index.js",
   "scripts": {
     "test:unit": "jest --config=./tests/configurations/unit/jest.config.js",
@@ -14,20 +14,24 @@
     "lint:fix": "eslint --fix .",
     "release": "standard-version",
     "test": "npm run test:unit && npm run test:integration",
-    "prebuild": "npm run clean",
+    "prebuild": "npm run clean && npm run copyassets:epsg && npm run generate",
     "build": "tsc --project tsconfig.build.json",
     "start": "npm run build && cd dist && node ./index.js",
     "clean": "rimraf dist",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "generate": "npm run generate:interface && npm run generate:type",
+    "generate:interface": "quicktype src/enums/geo/epsg-index/all.json -o ./src/enums/geo/GENERATED/epsg_interface.ts --just-types  --top-level Epsg",
+    "generate:type": "node ./scripts/gen_epsg_type.js",
+    "copyassets:epsg": "copyfiles -u 1 node_modules/epsg-index/all.json src/enums/geo"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MapColonies/ts-npm-package-boilerplate.git"
+    "url": "git+https://github.com/MapColonies/types.git"
   },
   "author": "MapColonies",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MapColonies/ts-npm-package-boilerplate/issues"
+    "url": "https://github.com/MapColonies/types/issues"
   },
   "husky": {
     "hooks": {
@@ -38,7 +42,7 @@
   "files": [
     "dist/**/*"
   ],
-  "homepage": "https://github.com/MapColonies/ts-npm-package-boilerplate#readme",
+  "homepage": "https://github.com/MapColonies/types#readme",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
@@ -58,7 +62,13 @@
     "standard-version": "^9.3.0",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.36",
+    "typedoc": "^0.24.7",
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "copyfiles": "^2.4.1",
+    "epsg-index": "^1.3.0",
+    "quicktype": "^23.0.37",
+    "ts-morph": "^18.0.0"
   }
 }

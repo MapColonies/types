@@ -1,5 +1,33 @@
-# ts-npm-package-boilerplate
+# @map-colonies/types
 
-After cloning this template, please do the following:
-1. insert secrets to repo secrets for the github actions.
-2. replace every string "ts-npm-package-boilerplate" with your package name.
+this package provides common Map-Colonies types
+
+---
+## Installation
+
+``` 
+$ npm install @map-colonies/types
+```
+
+### Usage
+
+```typescript
+import { EPSGDATA, EpsgCode } from '@map-colonies/types';
+
+// SAMPLE CODE FOR CREATING PARTIAL TYPE BASED ON EPSGCODE 
+type EpsgPartial = Extract<EpsgCode, '2000' | '2001'>;
+const o: EpsgPartial = '2000';
+...
+...
+...
+
+const code:EpsgCode = '2001';
+const exportRequestParams: CreateExportRequestParams = {
+  artifactCRS: code; // or EPSGDATA['2001'].code
+  ..
+  ..
+};
+
+
+...
+```
