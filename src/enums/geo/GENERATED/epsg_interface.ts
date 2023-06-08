@@ -1,4 +1,3 @@
-/* eslint-disable naming-convention  */
 export interface Epsg {
   code: string;
   kind: Kind;
@@ -43,5 +42,3 @@ export enum Unit {
   Metre = 'metre',
   USSurveyFoot = 'US survey foot',
 }
-
-/* eslint-disable naming-convention  */
