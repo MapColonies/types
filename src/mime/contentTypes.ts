@@ -1,9 +1,9 @@
 import { lookup } from 'mime-types';
 
 /**
- * Lookup the content-type associated with a file
+ * Lookup of internet media type associated to a file.
  * @param fileStr file ext name or full file name: for example 'png' | 'sample.json'
- * @returns string | undefined -  string is the expected content-type, undefined file if not supported.
+ * @returns string | undefined -  string is the expected content-type, undefined if file is not supported.
  */
 export function contentType(fileStr: string): string | undefined {
   try {
