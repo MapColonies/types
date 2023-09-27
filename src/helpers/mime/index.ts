@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/prefer-literal-enum-member */
 import { lookup as lookupMime, contentType as contentTypeMime } from 'mime-types';
 
-export type RasterMimeFormat = 'image/png' | 'image/jpeg';
+export type TilesMimeFormat = 'image/png' | 'image/jpeg';
 
 /**
  * Lookup of internet media type associated to a file.
