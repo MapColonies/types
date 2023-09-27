@@ -11,3 +11,6 @@ tsconfig.json
 coverage
 reports
 docs
+src/enums/geo/epsg-index/all.json
+src/enums/geo/GENERATED
+
