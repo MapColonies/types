@@ -1,4 +1,4 @@
 export * from './enums/common/domain';
 export * from './enums/common/artifact';
 export * from './enums/geo/epsg';
-export * from './mime/contentTypes';
+export * from './helpers/mime';
