@@ -6,6 +6,7 @@ export enum ArtifactDEMType {
 }
 
 export enum ArtifactRasterType {
+  //** test */
   GPKG = 'GPKG',
   LEGEND = 'LEGEND',
   METADATA = 'METADATA',
@@ -15,7 +16,6 @@ export enum ArtifactRasterType {
 }
 
 export enum Artifact3DType {
-  //** test */
   MODEL_3D = 'MODEL_3D',
   METADATA = 'METADATA',
   THUMBNAILS_SMALL = 'THUMBNAILS_SMALL',
