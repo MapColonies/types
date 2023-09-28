@@ -5,7 +5,9 @@ export enum ArtifactDEMType {
   LEGEND = 'LEGEND',
 }
 
-//** test */
+/**
+ * test
+ */
 export enum ArtifactRasterType {
   GPKG = 'GPKG',
   LEGEND = 'LEGEND',
