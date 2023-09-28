@@ -7,9 +7,10 @@ export enum ArtifactDEMType {
 
 /**
  * test
+ * @property GPKG is gpkg
  */
 export enum ArtifactRasterType {
-  GPKG = 'GPKG' /** test gpkg */,
+  GPKG = 'GPKG',
   LEGEND = 'LEGEND',
   METADATA = 'METADATA',
   THUMBNAILS_SMALL = 'THUMBNAILS_SMALL',
