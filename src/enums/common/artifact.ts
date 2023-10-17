@@ -6,8 +6,10 @@ export enum ArtifactDEMType {
 }
 
 /**
- * test
- * @property GPKG is gpkg
+ * Used for identifing raster artifact
+ * @property THUMBNAILS_SMALL pixel size:
+ * @property THUMBNAILS_MEDIUM pixel size:
+ * @property THUMBNAILS_LARGE pixel size:
  */
 export enum ArtifactRasterType {
   GPKG = 'GPKG',
@@ -18,6 +20,12 @@ export enum ArtifactRasterType {
   THUMBNAILS_LARGE = 'THUMBNAILS_LARGE',
 }
 
+/**
+ * Used for identifing 3D artifact
+ * @property THUMBNAILS_SMALL pixel size:
+ * @property THUMBNAILS_MEDIUM pixel size:
+ * @property THUMBNAILS_LARGE pixel size:
+ */
 export enum Artifact3DType {
   MODEL_3D = 'MODEL_3D',
   METADATA = 'METADATA',

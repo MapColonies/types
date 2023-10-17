@@ -18,6 +18,11 @@ export function lookup(fileStr: string): string | undefined {
   }
 }
 
+/**
+ *
+ * @param fileStr
+ * @returns string | undefined  -  string is the expected content-type, undefined if file is not supported
+ */
 export function contentType(fileStr: string): string | undefined {
   try {
     const content = contentTypeMime(fileStr);
