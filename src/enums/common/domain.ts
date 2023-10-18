@@ -1,3 +1,6 @@
+/**
+ * Determines the domain
+ */
 /* eslint-disable @typescript-eslint/naming-convention */
 export enum Domain {
   DEM = 'DEM',
