@@ -9,6 +9,10 @@ this package provides common Map-Colonies types
 $ npm install @map-colonies/types
 ```
 
+
+## Documentation
+All the code in the package is documented using TypeDoc. The auto generated site is available at [here](https://mapcolonies.github.io/types/).
+
 ### Usage
 
 ```typescript
