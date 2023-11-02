@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 1.3.2 (2023-11-02)
+
+
+### Bug Fixes
+
+* quicktype as dev dependency ([#5](https://github.com/MapColonies/types/issues/5)) ([aba5afc](https://github.com/MapColonies/types/commit/aba5afcfddc4c4115486a2df4b6c32e10988bd36))
+
 ### 1.3.1 (2023-09-27)
 
 ## [1.3.0](https://github.com/MapColonies/types/compare/v1.1.0...v1.3.0) (2023-09-27)
