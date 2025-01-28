@@ -4,15 +4,15 @@ import { RecordType } from '../../enums/common/metadata/recordType';
 
 export interface IMetadataCommonModel {
   // PROFILES COMMON FIELDS
-  type: RecordType | undefined;
-  classification: string | undefined;
-  productName: string | undefined;
-  description: string | undefined;
-  srsName: string | undefined;
-  producerName: string | undefined;
-  sensors: string[] | undefined;
-  region: string[] | undefined;
-  footprint: GeoJSON | undefined;
-  productId: string | undefined;
-  productType: ProductType | undefined;
+  type: RecordType;
+  classification: string;
+  productName?: string;
+  description?: string;
+  srsName?: string;
+  producerName?: string;
+  sensors: string[];
+  region: string[];
+  footprint: GeoJSON;
+  productId: string;
+  productType: ProductType;
 }
