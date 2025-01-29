@@ -6,7 +6,7 @@ export interface IMetadataCommonModel {
   // PROFILES COMMON FIELDS
   type: RecordType;
   classification: string;
-  productName?: string;
+  productName: string;
   description?: string;
   srsName?: string;
   producerName?: string;
