@@ -72,6 +72,6 @@
     "@types/mime-types": "^2.1.1",
     "copyfiles": "^2.4.1",
     "epsg-index": "^1.3.0",
-    "ts-morph": "^18.0.0"
+    "ts-morph": "^25.0.0"
   }
 }
