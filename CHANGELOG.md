@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/MapColonies/types/compare/v1.4.0...v1.5.0) (2025-03-11)
+
+
+### Features
+
+* new types for country list ([#23](https://github.com/MapColonies/types/issues/23)) ([10b39e8](https://github.com/MapColonies/types/commit/10b39e88a8959d3bfefd03db67461f07695b2fc2))
+
 ## [1.4.0](https://github.com/MapColonies/types/compare/v1.3.6...v1.4.0) (2025-03-05)
 
 
