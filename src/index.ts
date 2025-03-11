@@ -7,4 +7,5 @@ export * from './enums/common/metadata/transparency';
 export * from './enums/geo/epsg';
 export * from './helpers/mime';
 export * from './interfaces/common/metadata';
+export * from './types/countryTranslation';
 export * from './interfaces/common/export';
