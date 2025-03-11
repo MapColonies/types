@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/MapColonies/types/compare/v1.3.6...v1.4.0) (2025-03-05)
+
+
+### Features
+
+* add Artifact interface and ArtifactType union to export module ([#21](https://github.com/MapColonies/types/issues/21)) ([8d63110](https://github.com/MapColonies/types/commit/8d631101a2eab603e8b7cf37eeb2a4657a46cd9c))
+
 ### [1.3.6](https://github.com/MapColonies/types/compare/v1.3.5...v1.3.6) (2025-02-16)
 
 ### [1.3.5](https://github.com/MapColonies/types/compare/v1.3.4...v1.3.5) (2025-01-30)
