@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/MapColonies/types/compare/v1.6.0...v1.6.1) (2025-05-05)
+
+
+### Bug Fixes
+
+* add Vector Record ([#28](https://github.com/MapColonies/types/issues/28)) ([782e9a9](https://github.com/MapColonies/types/commit/782e9a922cce0744fb88a9995fc6714b6575e348))
+
 ## [1.6.0](https://github.com/MapColonies/types/compare/v1.4.0...v1.6.0) (2025-03-11)
 
 
