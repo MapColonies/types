@@ -1,4 +1,5 @@
 export enum RecordStatus {
   PUBLISHED = 'PUBLISHED',
   UNPUBLISHED = 'UNPUBLISHED',
+  IN_DELETE = 'IN_DELETE',
 }
