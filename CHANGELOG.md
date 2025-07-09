@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/MapColonies/types/compare/v1.6.1...v1.7.0) (2025-07-09)
+
+
+### Features
+
+* add BEING_DELETED status to record status + audit fix ([#29](https://github.com/MapColonies/types/issues/29)) ([72afa5e](https://github.com/MapColonies/types/commit/72afa5e33082b8516c07ff33a117caabc7277cca))
+
 ### [1.6.1](https://github.com/MapColonies/types/compare/v1.6.0...v1.6.1) (2025-05-05)
 
 
