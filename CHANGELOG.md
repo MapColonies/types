@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/MapColonies/types/compare/v1.8.0...v1.9.0) (2026-03-16)
+
+
+### Features
+
+* update npm publish step to use direct npm command ([2699765](https://github.com/MapColonies/types/commit/2699765e2dd4f02757d7687d7cc43b126f7cb033))
+
 ## [1.8.0](https://github.com/MapColonies/types/compare/v1.7.0...v1.8.0) (2026-03-16)
 
 
