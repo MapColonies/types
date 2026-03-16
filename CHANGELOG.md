@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/MapColonies/types/compare/v1.7.0...v1.8.0) (2026-03-16)
+
+
+### Features
+
+* add logger interface ([#31](https://github.com/MapColonies/types/issues/31)) ([f39bd90](https://github.com/MapColonies/types/commit/f39bd900e870076b3ed134c3635202f25dae078f))
+
 ## [1.7.0](https://github.com/MapColonies/types/compare/v1.6.1...v1.7.0) (2025-07-09)
 
 
