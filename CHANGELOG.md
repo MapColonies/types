@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/MapColonies/types/compare/v1.9.0...v1.10.0) (2026-06-11)
+
+
+### Features
+
+* added new types to the 3d ([#33](https://github.com/MapColonies/types/issues/33)) ([f723184](https://github.com/MapColonies/types/commit/f723184e08e6bcd69ccb7c0ae4b11a4c6fc1f1c2))
+
 ## [1.9.0](https://github.com/MapColonies/types/compare/v1.8.0...v1.9.0) (2026-03-16)
 
 
