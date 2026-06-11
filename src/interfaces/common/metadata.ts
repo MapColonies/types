@@ -1,5 +1,5 @@
 import { GeoJSON } from 'geojson';
-import { ProductTypeValue } from '../../enums/common/metadata/productType';
+import { ProductType } from '../../enums/common/metadata/productType';
 import { RecordType } from '../../enums/common/metadata/recordType';
 
 export interface IMetadataCommonModel {
@@ -14,5 +14,5 @@ export interface IMetadataCommonModel {
   region: string[];
   footprint: GeoJSON;
   productId: string;
-  productType: ProductTypeValue;
+  productType: ProductType;
 }
