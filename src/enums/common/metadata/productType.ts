@@ -15,6 +15,9 @@ export enum ProductType {
   QUANTIZED_MESH_DSM = 'QuantizedMeshDSM',
   QUANTIZED_MESH_DTM_BEST = 'QuantizedMeshDTMBest',
   QUANTIZED_MESH_DSM_BEST = 'QuantizedMeshDSMBest',
-  PHOTO_REALISTIC_3D = '3DPhotoRealistic',
-  POINT_CLOUD = 'PointCloud',
+  PHOTO_REALISTIC = '3DPhotoRealistic',
+  PHOTO_REALISTIC_BEST = '3DPhotoRealisticBest',
+  SEMANTIC = '3DSemantic',
+  SEMANTIC_MESH = '3DSemanticMesh',
+  POINT_CLOUD = '3DPointCloud',
 }
