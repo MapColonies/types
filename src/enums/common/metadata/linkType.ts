@@ -2,7 +2,7 @@ import { ProtocolType } from './protocolType';
 
 export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
 
-export enum AssetLinkType{
+export enum AssetLinkType {
   THUMBNAIL_S = 'THUMBNAIL_S',
   THUMBNAIL_M = 'THUMBNAIL_M',
   THUMBNAIL_L = 'THUMBNAIL_L',
