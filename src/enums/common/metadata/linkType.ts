@@ -1,5 +1,3 @@
-import { ProtocolType } from './protocolType';
-
 export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
 
 export enum AssetLinkType {
