@@ -1,4 +1,13 @@
-export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
+export enum ThumbnailLinkType {
+  THUMBNAIL_S = 'THUMBNAIL_S',
+  THUMBNAIL_M = 'THUMBNAIL_M',
+  THUMBNAIL_L = 'THUMBNAIL_L',
+}
+
+export enum LegendLinkType {
+  LEGEND_DOC = 'LEGEND_DOC',
+  LEGEND_IMG = 'LEGEND_IMG',
+}
 
 export enum AssetLinkType {
   THUMBNAIL_S = 'THUMBNAIL_S',
@@ -43,3 +52,12 @@ export enum VectorLinkType {
   WMTS = 'WMTS',
   WFS = 'WFS',
 }
+
+export const LinkType = {
+  ...RasterLinkType,
+  ...ThreeDLinkType,
+  ...DemLinkType,
+  ...VectorLinkType,
+} as const;
+
+export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
