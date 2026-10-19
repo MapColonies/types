@@ -11,7 +11,6 @@ export enum ThreeDProtocolType {
   THREE_D_TILES = '3DTiles',
   TERRAIN_QMESH = 'TERRAIN_QMESH',
   WFS = 'WFS',
-
 }
 
 export enum DemProtocolType {
