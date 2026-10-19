@@ -4,7 +4,6 @@ export enum RasterProtocolType {
   XYZ = 'XYZ',
   OSM = 'OSM',
   WFS = 'WFS',
-  WCS = 'WCS',
 }
 
 export enum ThreeDProtocolType {
