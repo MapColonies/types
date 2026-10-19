@@ -32,4 +32,6 @@ export const ProtocolType = {
   ...DemProtocolType,
   ...VectorProtocolType,
 } as const;
+/* eslint-disable @typescript-eslint/naming-convention */
 export type ProtocolType = RasterProtocolType | ThreeDProtocolType | DemProtocolType | VectorProtocolType;
+/* eslint-enable @typescript-eslint/naming-convention */

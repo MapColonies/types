@@ -1,5 +1,7 @@
 import { DemProtocolType, RasterProtocolType, ThreeDProtocolType, VectorProtocolType } from './protocolType';
 
+/* eslint-disable @typescript-eslint/naming-convention */
+
 export const ThumbnailLinkType = {
   THUMBNAIL_S: 'THUMBNAIL_S',
   THUMBNAIL_M: 'THUMBNAIL_M',
@@ -55,3 +57,5 @@ export const LinkType = {
   ...VectorLinkType,
 } as const;
 export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
+
+/* eslint-enable @typescript-eslint/naming-convention */
