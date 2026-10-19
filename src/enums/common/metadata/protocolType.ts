@@ -11,11 +11,15 @@ export enum ThreeDProtocolType {
   COPC = 'COPC',
   THREE_D_TILES = '3DTiles',
   TERRAIN_QMESH = 'TERRAIN_QMESH',
+  WFS = 'WFS',
+
 }
 
 export enum DemProtocolType {
   WMTS = 'WMTS',
   TERRAIN_QMESH = 'TERRAIN_QMESH',
+  WFS = 'WFS',
+  WCS = 'WCS',
 }
 
 export enum VectorProtocolType {

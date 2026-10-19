@@ -34,6 +34,7 @@ export type RasterLinkType = (typeof RasterLinkType)[keyof typeof RasterLinkType
 export const ThreeDLinkType = {
   ...ThreeDProtocolType,
   ...ThumbnailLinkType,
+  DOWNLOAD: 'DOWNLOAD',
 } as const;
 export type ThreeDLinkType = (typeof ThreeDLinkType)[keyof typeof ThreeDLinkType];
 
