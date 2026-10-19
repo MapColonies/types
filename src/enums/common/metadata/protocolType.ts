@@ -26,12 +26,11 @@ export enum VectorProtocolType {
   VECTOR_TILES = 'VECTOR_TILES',
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const ProtocolType = {
   ...RasterProtocolType,
   ...ThreeDProtocolType,
   ...DemProtocolType,
   ...VectorProtocolType,
 } as const;
-/* eslint-disable @typescript-eslint/naming-convention */
 export type ProtocolType = RasterProtocolType | ThreeDProtocolType | DemProtocolType | VectorProtocolType;
-/* eslint-enable @typescript-eslint/naming-convention */
