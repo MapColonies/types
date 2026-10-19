@@ -25,7 +25,6 @@ export const RasterLinkType = {
   WMS_BASE: 'WMS_BASE',
   WMTS: RasterProtocolType.WMTS,
   WMS: RasterProtocolType.WMS,
-  WCS: RasterProtocolType.WCS,
   WFS: RasterProtocolType.WFS,
   ...AssetLinkType,
 } as const;
