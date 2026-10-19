@@ -1,12 +1,33 @@
-export enum ProtocolType {
+export enum RasterProtocolType {
   WMS = 'WMS',
   WMTS = 'WMTS',
   XYZ = 'XYZ',
   OSM = 'OSM',
   WFS = 'WFS',
   WCS = 'WCS',
+}
+
+export enum ThreeDProtocolType {
   COPC = 'COPC',
   THREE_D_TILES = '3DTiles',
   TERRAIN_QMESH = 'TERRAIN_QMESH',
+}
+
+export enum DemProtocolType {
+  WMTS = 'WMTS',
+  TERRAIN_QMESH = 'TERRAIN_QMESH',
+}
+
+export enum VectorProtocolType {
+  WMTS = 'WMTS',
+  WFS = 'WFS',
   VECTOR_TILES = 'VECTOR_TILES',
 }
+
+export const ProtocolType = {
+  ...RasterProtocolType,
+  ...ThreeDProtocolType,
+  ...DemProtocolType,
+  ...VectorProtocolType,
+} as const;
+export type ProtocolType = RasterProtocolType | ThreeDProtocolType | DemProtocolType | VectorProtocolType;

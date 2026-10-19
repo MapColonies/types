@@ -1,57 +1,52 @@
-export enum ThumbnailLinkType {
-  THUMBNAIL_S = 'THUMBNAIL_S',
-  THUMBNAIL_M = 'THUMBNAIL_M',
-  THUMBNAIL_L = 'THUMBNAIL_L',
-}
+import { DemProtocolType, RasterProtocolType, ThreeDProtocolType, VectorProtocolType } from './protocolType';
 
-export enum LegendLinkType {
-  LEGEND_DOC = 'LEGEND_DOC',
-  LEGEND_IMG = 'LEGEND_IMG',
-}
+export const ThumbnailLinkType = {
+  THUMBNAIL_S: 'THUMBNAIL_S',
+  THUMBNAIL_M: 'THUMBNAIL_M',
+  THUMBNAIL_L: 'THUMBNAIL_L',
+} as const;
+export type ThumbnailLinkType = (typeof ThumbnailLinkType)[keyof typeof ThumbnailLinkType];
 
-export enum AssetLinkType {
-  THUMBNAIL_S = 'THUMBNAIL_S',
-  THUMBNAIL_M = 'THUMBNAIL_M',
-  THUMBNAIL_L = 'THUMBNAIL_L',
-  LEGEND_DOC = 'LEGEND_DOC',
-  LEGEND_IMG = 'LEGEND_IMG',
-}
+export const LegendLinkType = {
+  LEGEND_DOC: 'LEGEND_DOC',
+  LEGEND_IMG: 'LEGEND_IMG',
+} as const;
+export type LegendLinkType = (typeof LegendLinkType)[keyof typeof LegendLinkType];
 
-export enum RasterLinkType {
-  WMTS_KVP = 'WMTS_KVP',
-  WMTS_BASE = 'WMTS_BASE',
-  WMS_BASE = 'WMS_BASE',
-  WMTS = 'WMTS',
-  WMS = 'WMS',
-  WCS = 'WCS',
-  WFS = 'WFS',
-  THUMBNAIL_S = 'THUMBNAIL_S',
-  THUMBNAIL_M = 'THUMBNAIL_M',
-  THUMBNAIL_L = 'THUMBNAIL_L',
-  LEGEND_DOC = 'LEGEND_DOC',
-  LEGEND_IMG = 'LEGEND_IMG',
-}
+export const AssetLinkType = {
+  ...ThumbnailLinkType,
+  ...LegendLinkType,
+} as const;
+export type AssetLinkType = (typeof AssetLinkType)[keyof typeof AssetLinkType];
 
-export enum ThreeDLinkType {
-  THREE_D_TILES = '3DTiles',
-  TERRAIN_QMESH = 'TERRAIN_QMESH',
-  THUMBNAIL_S = 'THUMBNAIL_S',
-  THUMBNAIL_M = 'THUMBNAIL_M',
-  THUMBNAIL_L = 'THUMBNAIL_L',
-}
+export const RasterLinkType = {
+  WMTS_KVP: 'WMTS_KVP',
+  WMTS_BASE: 'WMTS_BASE',
+  WMS_BASE: 'WMS_BASE',
+  WMTS: RasterProtocolType.WMTS,
+  WMS: RasterProtocolType.WMS,
+  WCS: RasterProtocolType.WCS,
+  WFS: RasterProtocolType.WFS,
+  ...AssetLinkType,
+} as const;
+export type RasterLinkType = (typeof RasterLinkType)[keyof typeof RasterLinkType];
 
-export enum DemLinkType {
-  WMTS = 'WMTS',
-  TERRAIN_QMESH = 'TERRAIN_QMESH',
-  THUMBNAIL_S = 'THUMBNAIL_S',
-  THUMBNAIL_M = 'THUMBNAIL_M',
-  THUMBNAIL_L = 'THUMBNAIL_L',
-}
+export const ThreeDLinkType = {
+  ...ThreeDProtocolType,
+  ...ThumbnailLinkType,
+} as const;
+export type ThreeDLinkType = (typeof ThreeDLinkType)[keyof typeof ThreeDLinkType];
 
-export enum VectorLinkType {
-  WMTS = 'WMTS',
-  WFS = 'WFS',
-}
+export const DemLinkType = {
+  ...DemProtocolType,
+  ...ThumbnailLinkType,
+} as const;
+export type DemLinkType = (typeof DemLinkType)[keyof typeof DemLinkType];
+
+export const VectorLinkType = {
+  ...VectorProtocolType,
+} as const;
+export type VectorLinkType = (typeof VectorLinkType)[keyof typeof VectorLinkType];
 
 export const LinkType = {
   ...RasterLinkType,
@@ -59,5 +54,4 @@ export const LinkType = {
   ...DemLinkType,
   ...VectorLinkType,
 } as const;
-
 export type LinkType = RasterLinkType | ThreeDLinkType | DemLinkType | VectorLinkType;
