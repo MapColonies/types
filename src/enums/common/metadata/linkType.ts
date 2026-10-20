@@ -1,4 +1,9 @@
-import { DemProtocolType, RasterProtocolType, ThreeDProtocolType, VectorProtocolType } from './protocolType';
+import {
+  DemProtocolType,
+  RasterProtocolType,
+  ThreeDProtocolType,
+  VectorProtocolType
+} from './protocolType';
 
 /* eslint-disable @typescript-eslint/naming-convention */
 
@@ -25,9 +30,7 @@ export const RasterLinkType = {
   WMTS_KVP: 'WMTS_KVP',
   WMTS_BASE: 'WMTS_BASE',
   WMS_BASE: 'WMS_BASE',
-  WMTS: RasterProtocolType.WMTS,
-  WMS: RasterProtocolType.WMS,
-  WFS: RasterProtocolType.WFS,
+  ...RasterProtocolType,
   ...AssetLinkType,
 } as const;
 export type RasterLinkType = (typeof RasterLinkType)[keyof typeof RasterLinkType];
