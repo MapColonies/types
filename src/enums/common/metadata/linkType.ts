@@ -11,10 +11,10 @@ export const LinkType = {
   ...VectorLinkType,
 } as const;
 export type LinkType =
-  import('./linkType/RasterLinkType').RasterLinkType |
-  import('./linkType/ThreeDLinkType').ThreeDLinkType |
-  import('./linkType/DemLinkType').DemLinkType |
-  import('./linkType/VectorLinkType').VectorLinkType;
+  | import('./linkType/RasterLinkType').RasterLinkType
+  | import('./linkType/ThreeDLinkType').ThreeDLinkType
+  | import('./linkType/DemLinkType').DemLinkType
+  | import('./linkType/VectorLinkType').VectorLinkType;
 
 export { ThumbnailLinkType, LegendLinkType, AssetLinkType } from './linkType/common';
 export { DemLinkType } from './linkType/DemLinkType';

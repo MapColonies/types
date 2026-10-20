@@ -13,13 +13,13 @@ export const ProtocolType = {
   ...OGCImageryProtocolType,
   ...ProprietaryImageryProtocolType,
 } as const;
-export type ProtocolType = 
-  import('./protocolType/RasterProtocolType').RasterProtocolType |
-  import('./protocolType/ThreeDProtocolType').ThreeDProtocolType |
-  import('./protocolType/DemProtocolType').DemProtocolType |
-  import('./protocolType/VectorProtocolType').VectorProtocolType |
-  import('./protocolType/common').OGCImageryProtocolType |
-  import('./protocolType/common').ProprietaryImageryProtocolType;
+export type ProtocolType =
+  | import('./protocolType/RasterProtocolType').RasterProtocolType
+  | import('./protocolType/ThreeDProtocolType').ThreeDProtocolType
+  | import('./protocolType/DemProtocolType').DemProtocolType
+  | import('./protocolType/VectorProtocolType').VectorProtocolType
+  | import('./protocolType/common').OGCImageryProtocolType
+  | import('./protocolType/common').ProprietaryImageryProtocolType;
 
 export { OGCImageryProtocolType, OGCVectorProtocolType, ProprietaryImageryProtocolType } from './protocolType/common';
 export { DemProtocolType } from './protocolType/DemProtocolType';
