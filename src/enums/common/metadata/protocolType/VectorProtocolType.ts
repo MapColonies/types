@@ -7,3 +7,4 @@ export const VectorProtocolType = {
   VECTOR_TILES: 'VECTOR_TILES',
 } as const;
 export type VectorProtocolType = (typeof VectorProtocolType)[keyof typeof VectorProtocolType];
+/* eslint-enable @typescript-eslint/naming-convention */

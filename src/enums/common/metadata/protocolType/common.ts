@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export const OGCImageryProtocolType = {
   WMS: 'WMS',
   WMTS: 'WMTS',
@@ -15,3 +16,9 @@ export const OGCVectorProtocolType = {
   WFS: 'WFS',
 } as const;
 export type OGCVectorProtocolType = (typeof OGCVectorProtocolType)[keyof typeof OGCVectorProtocolType];
+
+export const ProprietaryDemProtocolType = {
+  TERRAIN_QMESH: 'TERRAIN_QMESH',
+} as const;
+export type ProprietaryDemProtocolType = (typeof ProprietaryDemProtocolType)[keyof typeof ProprietaryDemProtocolType];
+/* eslint-enable @typescript-eslint/naming-convention */

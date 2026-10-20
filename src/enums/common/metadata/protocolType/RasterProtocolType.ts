@@ -7,3 +7,4 @@ export const RasterProtocolType = {
   WFS: OGCVectorProtocolType.WFS,
 } as const;
 export type RasterProtocolType = (typeof RasterProtocolType)[keyof typeof RasterProtocolType];
+/* eslint-enable @typescript-eslint/naming-convention */

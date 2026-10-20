@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { RasterProtocolType } from '../protocolType/RasterProtocolType';
 import { AssetLinkType } from './common';
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const RasterLinkType = {
   WMTS_KVP: 'WMTS_KVP',
   WMTS_BASE: 'WMTS_BASE',
@@ -10,3 +10,4 @@ export const RasterLinkType = {
   ...AssetLinkType,
 } as const;
 export type RasterLinkType = (typeof RasterLinkType)[keyof typeof RasterLinkType];
+/* eslint-enable @typescript-eslint/naming-convention */
