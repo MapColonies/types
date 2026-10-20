@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { OGCVectorProtocolType } from './common';
 import { DemProtocolType } from './DemProtocolType';
 
