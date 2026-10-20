@@ -1,3 +1,5 @@
+import { LegendLinkType, ThumbnailLinkType } from './metadata/linkType';
+
 export enum ArtifactDEMType {
   MODEL = 'MODEL',
   METADATA = 'METADATA',
@@ -5,19 +7,17 @@ export enum ArtifactDEMType {
   LEGEND = 'LEGEND',
 }
 
-export enum ArtifactRasterType {
-  GPKG = 'GPKG',
-  LEGEND = 'LEGEND',
-  METADATA = 'METADATA',
-  THUMBNAILS_SMALL = 'THUMBNAILS_SMALL',
-  THUMBNAILS_MEDIUM = 'THUMBNAILS_MEDIUM',
-  THUMBNAILS_LARGE = 'THUMBNAILS_LARGE',
-}
+export const ArtifactRasterType = {
+  GPKG: 'GPKG',
+  METADATA: 'METADATA',
+  ...LegendLinkType,
+  ...ThumbnailLinkType,
+} as const;
+export type ArtifactRasterType = (typeof ArtifactRasterType)[keyof typeof ArtifactRasterType];
 
-export enum Artifact3DType {
-  MODEL_3D = 'MODEL_3D',
-  METADATA = 'METADATA',
-  THUMBNAILS_SMALL = 'THUMBNAILS_SMALL',
-  THUMBNAILS_MEDIUM = 'THUMBNAILS_MEDIUM',
-  THUMBNAILS_LARGE = 'THUMBNAILS_LARGE',
-}
+export const Artifact3DType = {
+  MODEL_3D:'MODEL_3D',
+  METADATA: 'METADATA',
+  ...ThumbnailLinkType,
+} as const;
+export type Artifact3DType = (typeof Artifact3DType)[keyof typeof Artifact3DType];
