@@ -1,9 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {
-  OGC_ImageryProtocolType,
-  OGC_VectorProtocolType,
-  PROPRIETARY_DemProtocolType
-} from './common';
+import { OGC_ImageryProtocolType, OGC_VectorProtocolType, PROPRIETARY_DemProtocolType } from './common';
 
 export const DemProtocolType = {
   WMTS: OGC_ImageryProtocolType.WMTS,

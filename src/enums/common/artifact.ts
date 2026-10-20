@@ -17,7 +17,7 @@ export const ArtifactRasterType = {
 export type ArtifactRasterType = (typeof ArtifactRasterType)[keyof typeof ArtifactRasterType];
 
 export const Artifact3DType = {
-  MODEL_3D:'MODEL_3D',
+  MODEL_3D: 'MODEL_3D',
   METADATA: 'METADATA',
   ...ThumbnailLinkType,
 } as const;

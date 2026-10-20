@@ -1,10 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import {
-  OGC_ThreeDProtocolType,
-  OGC_VectorProtocolType,
-  OPEN_ThreeDProtocolType,
-  PROPRIETARY_DemProtocolType
-} from './common';
+import { OGC_ThreeDProtocolType, OGC_VectorProtocolType, OPEN_ThreeDProtocolType, PROPRIETARY_DemProtocolType } from './common';
 
 export const ThreeDProtocolType = {
   COPC: OPEN_ThreeDProtocolType.COPC,
