@@ -1,9 +1,3 @@
-export { ThumbnailLinkType, LegendLinkType, AssetLinkType } from './linkType/common';
-export { DemLinkType } from './linkType/DemLinkType';
-export { RasterLinkType } from './linkType/RasterLinkType';
-export { ThreeDLinkType } from './linkType/ThreeDLinkType';
-export { VectorLinkType } from './linkType/VectorLinkType';
-
 import { DemLinkType } from './linkType/DemLinkType';
 import { RasterLinkType } from './linkType/RasterLinkType';
 import { ThreeDLinkType } from './linkType/ThreeDLinkType';
@@ -21,3 +15,9 @@ export type LinkType =
   import('./linkType/ThreeDLinkType').ThreeDLinkType |
   import('./linkType/DemLinkType').DemLinkType |
   import('./linkType/VectorLinkType').VectorLinkType;
+
+export { ThumbnailLinkType, LegendLinkType, AssetLinkType } from './linkType/common';
+export { DemLinkType } from './linkType/DemLinkType';
+export { RasterLinkType } from './linkType/RasterLinkType';
+export { ThreeDLinkType } from './linkType/ThreeDLinkType';
+export { VectorLinkType } from './linkType/VectorLinkType';

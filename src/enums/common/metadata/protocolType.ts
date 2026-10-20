@@ -1,9 +1,3 @@
-export { OGCImageryProtocolType, OGCVectorProtocolType, ProprietaryImageryProtocolType } from './protocolType/common';
-export { DemProtocolType } from './protocolType/DemProtocolType';
-export { RasterProtocolType } from './protocolType/RasterProtocolType';
-export { ThreeDProtocolType } from './protocolType/ThreeDProtocolType';
-export { VectorProtocolType } from './protocolType/VectorProtocolType';
-
 import { OGCImageryProtocolType, ProprietaryImageryProtocolType } from './protocolType/common';
 import { DemProtocolType } from './protocolType/DemProtocolType';
 import { RasterProtocolType } from './protocolType/RasterProtocolType';
@@ -26,3 +20,9 @@ export type ProtocolType =
   import('./protocolType/VectorProtocolType').VectorProtocolType |
   import('./protocolType/common').OGCImageryProtocolType |
   import('./protocolType/common').ProprietaryImageryProtocolType;
+
+export { OGCImageryProtocolType, OGCVectorProtocolType, ProprietaryImageryProtocolType } from './protocolType/common';
+export { DemProtocolType } from './protocolType/DemProtocolType';
+export { RasterProtocolType } from './protocolType/RasterProtocolType';
+export { ThreeDProtocolType } from './protocolType/ThreeDProtocolType';
+export { VectorProtocolType } from './protocolType/VectorProtocolType';
