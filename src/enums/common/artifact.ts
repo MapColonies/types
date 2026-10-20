@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { LegendLinkType, ThumbnailLinkType } from './metadata/linkType';
 
 export enum ArtifactDEMType {
@@ -21,3 +22,4 @@ export const Artifact3DType = {
   ...ThumbnailLinkType,
 } as const;
 export type Artifact3DType = (typeof Artifact3DType)[keyof typeof Artifact3DType];
+/* eslint-enable @typescript-eslint/naming-convention */
