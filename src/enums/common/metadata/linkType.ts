@@ -16,8 +16,8 @@ export type LinkType =
   | import('./linkType/DemLinkType').DemLinkType
   | import('./linkType/VectorLinkType').VectorLinkType;
 
-export { ThumbnailLinkType, LegendLinkType, AssetLinkType } from './linkType/common';
-export { DemLinkType } from './linkType/DemLinkType';
-export { RasterLinkType } from './linkType/RasterLinkType';
-export { ThreeDLinkType } from './linkType/ThreeDLinkType';
-export { VectorLinkType } from './linkType/VectorLinkType';
+export * from './linkType/common';
+export * from './linkType/DemLinkType';
+export * from './linkType/RasterLinkType';
+export * from './linkType/ThreeDLinkType';
+export * from './linkType/VectorLinkType';

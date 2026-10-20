@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { OGCImageryProtocolType, OGCVectorProtocolType } from './common';
+import { OGC_ImageryProtocolType, OGC_VectorProtocolType } from './common';
 
 export const VectorProtocolType = {
-  WMTS: OGCImageryProtocolType.WMTS,
-  WFS: OGCVectorProtocolType.WFS,
+  WMTS: OGC_ImageryProtocolType.WMTS,
+  WFS: OGC_VectorProtocolType.WFS,
   VECTOR_TILES: 'VECTOR_TILES',
 } as const;
 export type VectorProtocolType = (typeof VectorProtocolType)[keyof typeof VectorProtocolType];

@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { OGCImageryProtocolType, OGCVectorProtocolType, ProprietaryDemProtocolType } from './common';
+import {
+  OGC_ImageryProtocolType,
+  OGC_VectorProtocolType,
+  PROPRIETARY_DemProtocolType
+} from './common';
 
 export const DemProtocolType = {
-  WMTS: OGCImageryProtocolType.WMTS,
-  TERRAIN_QMESH: ProprietaryDemProtocolType.TERRAIN_QMESH,
-  WFS: OGCVectorProtocolType.WFS,
-  WCS: OGCImageryProtocolType.WCS,
+  WMTS: OGC_ImageryProtocolType.WMTS,
+  TERRAIN_QMESH: PROPRIETARY_DemProtocolType.TERRAIN_QMESH,
+  WFS: OGC_VectorProtocolType.WFS,
+  WCS: OGC_ImageryProtocolType.WCS,
 } as const;
 export type DemProtocolType = (typeof DemProtocolType)[keyof typeof DemProtocolType];
 /* eslint-enable @typescript-eslint/naming-convention */
