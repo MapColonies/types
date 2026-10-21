@@ -30,6 +30,11 @@ export const OGC_VectorProtocolType = {
 } as const;
 export type OGC_VectorProtocolType = (typeof OGC_VectorProtocolType)[keyof typeof OGC_VectorProtocolType];
 
+export const OPEN_VectorProtocolType = {
+  VECTOR_TILES: 'VECTOR_TILES',
+} as const;
+export type OPEN_VectorProtocolType = (typeof OPEN_VectorProtocolType)[keyof typeof OPEN_VectorProtocolType];
+
 export const OGC_ThreeDProtocolType = {
   THREE_D_TILES: '3DTiles',
 } as const;
