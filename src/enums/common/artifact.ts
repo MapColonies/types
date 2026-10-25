@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { LegendLinkType, ThumbnailLinkType } from './metadata/linkType';
 
-export enum ArtifactDEMType {
-  MODEL = 'MODEL',
-  METADATA = 'METADATA',
-  ROI = 'ROI',
-  LEGEND = 'LEGEND',
-}
+export const ArtifactDEMType = {
+  MODEL: 'MODEL',
+  METADATA: 'METADATA',
+  ROI: 'ROI',
+  ...LegendLinkType,
+} as const;
+export type ArtifactDEMType = (typeof ArtifactDEMType)[keyof typeof ArtifactDEMType];
 
 export const ArtifactRasterType = {
   GPKG: 'GPKG',
