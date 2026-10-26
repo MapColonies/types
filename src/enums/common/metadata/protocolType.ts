@@ -1,36 +1,30 @@
-export enum RasterProtocolType {
-  WMS = 'WMS',
-  WMTS = 'WMTS',
-  XYZ = 'XYZ',
-  OSM = 'OSM',
-  WFS = 'WFS',
-}
-
-export enum ThreeDProtocolType {
-  COPC = 'COPC',
-  THREE_D_TILES = '3DTiles',
-  TERRAIN_QMESH = 'TERRAIN_QMESH',
-  WFS = 'WFS',
-}
-
-export enum DemProtocolType {
-  WMTS = 'WMTS',
-  TERRAIN_QMESH = 'TERRAIN_QMESH',
-  WFS = 'WFS',
-  WCS = 'WCS',
-}
-
-export enum VectorProtocolType {
-  WMTS = 'WMTS',
-  WFS = 'WFS',
-  VECTOR_TILES = 'VECTOR_TILES',
-}
+import {
+  OGC_ImageryProtocolType,
+  OGC_ThreeDProtocolType,
+  OGC_VectorProtocolType,
+  OPEN_ThreeDProtocolType,
+  OPEN_VectorProtocolType,
+  PROPRIETARY_DemProtocolType,
+  PROPRIETARY_ImageryProtocolType,
+} from './protocolType/common';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const ProtocolType = {
-  ...RasterProtocolType,
-  ...ThreeDProtocolType,
-  ...DemProtocolType,
-  ...VectorProtocolType,
+  ...OGC_ImageryProtocolType,
+  ...PROPRIETARY_ImageryProtocolType,
+  ...OGC_VectorProtocolType,
+  ...OPEN_VectorProtocolType,
+  ...OGC_ThreeDProtocolType,
+  ...OPEN_ThreeDProtocolType,
+  ...PROPRIETARY_DemProtocolType,
 } as const;
-export type ProtocolType = RasterProtocolType | ThreeDProtocolType | DemProtocolType | VectorProtocolType;
+export type ProtocolType =
+  | import('./protocolType/common').OGC_ImageryProtocolType
+  | import('./protocolType/common').PROPRIETARY_ImageryProtocolType
+  | import('./protocolType/common').OGC_VectorProtocolType
+  | import('./protocolType/common').OPEN_VectorProtocolType
+  | import('./protocolType/common').OGC_ThreeDProtocolType
+  | import('./protocolType/common').OPEN_ThreeDProtocolType
+  | import('./protocolType/common').PROPRIETARY_DemProtocolType;
+
+export * from './protocolType/common';
