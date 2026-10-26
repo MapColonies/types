@@ -5,7 +5,7 @@ import {
   OPEN_ThreeDProtocolType,
   OPEN_VectorProtocolType,
   PROPRIETARY_DemProtocolType,
-  PROPRIETARY_ImageryProtocolType
+  PROPRIETARY_ImageryProtocolType,
 } from './protocolType/common';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
