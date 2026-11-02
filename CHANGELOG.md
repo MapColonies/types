@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.1](https://github.com/MapColonies/types/compare/v1.11.0...v1.11.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* download link type moved to dem ([efc1b61](https://github.com/MapColonies/types/commit/efc1b61fb32950f4e4ea2ff5b707b11203055fe5))
+* protocol type and link type enums ([#38](https://github.com/MapColonies/types/issues/38)) ([bf693d3](https://github.com/MapColonies/types/commit/bf693d3e6df2ecd7e52365d5158f0780566cd39b))
+
 ## [1.11.0](https://github.com/MapColonies/types/compare/v1.10.0...v1.11.0) (2026-10-19)
 
 
