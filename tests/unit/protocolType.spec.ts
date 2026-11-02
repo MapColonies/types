@@ -10,7 +10,7 @@ const sorted = (values: string[]): string[] => [...values].sort((a, b) => a.loca
 describe('protocolType', () => {
   it('exposes exactly the expected values', () => {
     expect(sorted(Object.values(ProtocolType))).toEqual(
-      sorted(['WMS', 'WMTS', 'XYZ', 'OSM', 'WFS', 'WCS', 'COPC', '3DTiles', 'TERRAIN_QMESH', 'VECTOR_TILES'])
+      sorted(['WMS', 'WMTS', 'XYZ', 'OSM', 'MAPBOX_STYLE', 'BING_MAPS', 'WFS', 'WCS', 'COPC', '3DTiles', 'TERRAIN_QMESH', 'VECTOR_TILES'])
     );
   });
 
