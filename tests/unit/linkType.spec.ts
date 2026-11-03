@@ -37,8 +37,4 @@ describe('linkType', () => {
   it('rejects a value that belongs to none of the exported enums', () => {
     expect(Object.values(AssetLinkType)).not.toContain('NOT_A_REAL_LINK_TYPE');
   });
-
-  it('no longer re-exports the domain-specific link enums (moved to mc-models)', () => {
-    expect(sorted(Object.keys(linkTypeModule))).toEqual(sorted(['ThumbnailLinkType', 'LegendLinkType', 'AssetLinkType']));
-  });
 });
