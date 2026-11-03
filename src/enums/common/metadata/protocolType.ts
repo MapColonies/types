@@ -28,3 +28,7 @@ export type ProtocolType =
   | import('./protocolType/common').PROPRIETARY_DemProtocolType;
 
 export * from './protocolType/common';
+export * from './protocolType/RasterProtocolType';
+export * from './protocolType/ThreeDProtocolType';
+export * from './protocolType/DemProtocolType';
+export * from './protocolType/VectorProtocolType';
