@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.2](https://github.com/MapColonies/types/compare/v1.12.1...v1.12.2) (2026-11-05)
+
+
+### Bug Fixes
+
+* remove capability defined in wmts-client ([#44](https://github.com/MapColonies/types/issues/44)) ([1c4bb1c](https://github.com/MapColonies/types/commit/1c4bb1cede80d79c78fa006b4b73f84dc49bd3da))
+
 ## [1.12.1](https://github.com/MapColonies/types/compare/v1.12.0...v1.12.1) (2026-11-05)
 
 
