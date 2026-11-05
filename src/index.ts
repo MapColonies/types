@@ -11,4 +11,3 @@ export * from './enums/geo/epsg';
 export * from './helpers/mime';
 export * from './types/countryTranslation';
 export * from './interfaces';
-export * from './schemas';
