@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.3](https://github.com/MapColonies/types/compare/v1.12.2...v1.12.3) (2026-11-09)
+
+
+### Bug Fixes
+
+* basemap management migration to zod ([#46](https://github.com/MapColonies/types/issues/46)) ([5a0feb6](https://github.com/MapColonies/types/commit/5a0feb60bb370eff0351a3a937992fc11cad0d88))
+
 ## [1.12.2](https://github.com/MapColonies/types/compare/v1.12.1...v1.12.2) (2026-11-05)
 
 
