@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention, import/exports-last */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { z } from 'zod';
 import { SourceType } from '../../enums/common/metadata/sourceType';
 import { Domain } from '../../enums/common/domain';
@@ -28,99 +28,31 @@ export const CatalogResourceLayerSourceSchema = z.object({
 });
 export type CatalogResourceLayerSource = z.infer<typeof CatalogResourceLayerSourceSchema>;
 
-export const ExternalLayerSourceInputSchema = z.object({
+export const ExternalLayerSourceSchema = z.object({
   type: z.literal(SourceType.EXTERNAL),
   details: ExternalLayerDetailsSchema,
 });
-export type ExternalLayerSourceInput = z.infer<typeof ExternalLayerSourceInputSchema>;
+export type ExternalLayerSource = z.infer<typeof ExternalLayerSourceSchema>;
 
-export const BasemapLayerSourceInputSchema = z.discriminatedUnion('type', [CatalogResourceLayerSourceSchema, ExternalLayerSourceInputSchema]);
+export const BasemapLayerSourceInputSchema = z.discriminatedUnion('type', [CatalogResourceLayerSourceSchema, ExternalLayerSourceSchema]);
 export type BasemapLayerSourceInput = z.infer<typeof BasemapLayerSourceInputSchema>;
 
-export const ExternalLayerSourceOutputSchema = z.object({
-  type: z.literal(SourceType.EXTERNAL),
-  status: z.literal(ResourceResolutionStatus.RESOLVED),
-  details: ExternalLayerDetailsSchema,
-});
-export type ExternalLayerSourceOutput = z.infer<typeof ExternalLayerSourceOutputSchema>;
-
-export interface ResolvedCatalogResourceLayerSource<TLayer = unknown, TCapabilities = unknown> {
-  type: typeof SourceType.CATALOG_RESOURCE;
-  domain: typeof Domain.RASTER;
-  uniqueness: RasterUniqueness;
-  status: typeof ResourceResolutionStatus.RESOLVED;
-  layer: TLayer;
-  capabilities: TCapabilities;
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function buildResolvedCatalogResourceLayerSourceSchema<TLayer extends z.ZodTypeAny, TCapabilities extends z.ZodTypeAny>(
-  layerSchema: TLayer,
-  capabilitiesSchema: TCapabilities
-) {
-  return z.object({
-    type: z.literal(SourceType.CATALOG_RESOURCE),
-    domain: z.literal(Domain.RASTER),
-    uniqueness: RasterUniquenessSchema,
-    status: z.literal(ResourceResolutionStatus.RESOLVED),
-    layer: layerSchema,
-    capabilities: capabilitiesSchema,
-  });
-}
-
-export function createResolvedCatalogResourceLayerSourceSchema<TLayer extends z.ZodTypeAny, TCapabilities extends z.ZodTypeAny>(
-  layerSchema: TLayer,
-  capabilitiesSchema: TCapabilities
-): z.ZodType<ResolvedCatalogResourceLayerSource<z.infer<TLayer>, z.infer<TCapabilities>>> {
-  return buildResolvedCatalogResourceLayerSourceSchema(layerSchema, capabilitiesSchema) as unknown as z.ZodType<
-    ResolvedCatalogResourceLayerSource<z.infer<TLayer>, z.infer<TCapabilities>>
-  >;
-}
-
-export const UnresolvedCatalogResourceLayerSourceSchema = z.object({
-  type: z.literal(SourceType.CATALOG_RESOURCE),
-  domain: z.literal(Domain.RASTER),
-  uniqueness: RasterUniquenessSchema,
-  status: z.literal(ResourceResolutionStatus.UNRESOLVED),
-  layer: z.null(),
-  capabilities: z.null(),
-});
-export type UnresolvedCatalogResourceLayerSource = z.infer<typeof UnresolvedCatalogResourceLayerSourceSchema>;
-
-export type CatalogResourceLayerSourceOutput<TLayer = unknown, TCapabilities = unknown> =
-  | ResolvedCatalogResourceLayerSource<TLayer, TCapabilities>
-  | UnresolvedCatalogResourceLayerSource;
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-function buildCatalogResourceLayerSourceOutputSchema<TLayer extends z.ZodTypeAny, TCapabilities extends z.ZodTypeAny>(
-  layerSchema: TLayer,
-  capabilitiesSchema: TCapabilities
-) {
-  return z.discriminatedUnion('status', [
-    buildResolvedCatalogResourceLayerSourceSchema(layerSchema, capabilitiesSchema),
-    UnresolvedCatalogResourceLayerSourceSchema,
-  ]);
-}
-
-export function createCatalogResourceLayerSourceOutputSchema<TLayer extends z.ZodTypeAny, TCapabilities extends z.ZodTypeAny>(
-  layerSchema: TLayer,
-  capabilitiesSchema: TCapabilities
-): z.ZodType<CatalogResourceLayerSourceOutput<z.infer<TLayer>, z.infer<TCapabilities>>> {
-  return buildCatalogResourceLayerSourceOutputSchema(layerSchema, capabilitiesSchema) as unknown as z.ZodType<
-    CatalogResourceLayerSourceOutput<z.infer<TLayer>, z.infer<TCapabilities>>
-  >;
-}
-
+// A read source is the write source plus the outcome of resolving it; external sources need no catalog lookup, so they are always RESOLVED.
 export type BasemapLayerSourceOutput<TLayer = unknown, TCapabilities = unknown> =
-  | CatalogResourceLayerSourceOutput<TLayer, TCapabilities>
-  | ExternalLayerSourceOutput;
+  | (CatalogResourceLayerSource & { status: typeof ResourceResolutionStatus.RESOLVED; layer: TLayer; capabilities: TCapabilities })
+  | (CatalogResourceLayerSource & { status: typeof ResourceResolutionStatus.UNRESOLVED; layer: null; capabilities: null })
+  | (ExternalLayerSource & { status: typeof ResourceResolutionStatus.RESOLVED });
 
 export function createBasemapLayerSourceOutputSchema<TLayer extends z.ZodTypeAny, TCapabilities extends z.ZodTypeAny>(
   layerSchema: TLayer,
   capabilitiesSchema: TCapabilities
 ): z.ZodType<BasemapLayerSourceOutput<z.infer<TLayer>, z.infer<TCapabilities>>> {
+  const resolved = z.literal(ResourceResolutionStatus.RESOLVED);
+  const unresolved = z.literal(ResourceResolutionStatus.UNRESOLVED);
+
   return z.union([
-    buildCatalogResourceLayerSourceOutputSchema(layerSchema, capabilitiesSchema),
-    ExternalLayerSourceOutputSchema,
+    CatalogResourceLayerSourceSchema.extend({ status: resolved, layer: layerSchema, capabilities: capabilitiesSchema }),
+    CatalogResourceLayerSourceSchema.extend({ status: unresolved, layer: z.null(), capabilities: z.null() }),
+    ExternalLayerSourceSchema.extend({ status: resolved }),
   ]) as unknown as z.ZodType<BasemapLayerSourceOutput<z.infer<TLayer>, z.infer<TCapabilities>>>;
 }

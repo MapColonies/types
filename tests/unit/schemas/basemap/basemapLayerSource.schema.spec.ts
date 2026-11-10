@@ -48,7 +48,7 @@ describe('BasemapLayerSourceInputSchema', () => {
   });
 });
 
-describe('createBasemapLayerSourceOutputSchema - nested discriminated union (type -> status)', () => {
+describe('createBasemapLayerSourceOutputSchema - write source plus resolution status', () => {
   const layerSchema = z.object({ id: z.string() }).passthrough();
   const capabilitiesSchema = z.object({ id: z.string() }).passthrough();
   const schema = createBasemapLayerSourceOutputSchema(layerSchema, capabilitiesSchema);
@@ -95,6 +95,11 @@ describe('createBasemapLayerSourceOutputSchema - nested discriminated union (typ
       layer: null,
       capabilities: null,
     });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects a write-shaped source that carries no status', () => {
+    const result = schema.safeParse({ type: SourceType.EXTERNAL, details: { protocol: 'XYZ', name: 'n', url: 'https://example.com' } });
     expect(result.success).toBe(false);
   });
 

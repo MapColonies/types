@@ -1,0 +1,426 @@
+<title>Simplified Basemap Types</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+  /* layout: write model in the centre as the single source of truth; shared types hang off its left, the read model derives from it on the right */
+  :root{
+    --bg:#f6f4ef;
+    --surface:#ffffff;
+    --surface-2:#edeae1;
+    --fg:#211f1c;
+    --fg-muted:#6b665c;
+    --border:#d8d3c6;
+    --mono-fg:#3a3630;
+    --accent-in:#0d6b63;
+    --accent-out:#8a4b12;
+    --accent-mid:#4a4638;
+    --generic:#9b3fa8;
+    --line:#8a8572;
+    --line-strong:#211f1c;
+    --line-label-bg:#f6f4ef;
+    --removed:#a13a2b;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#17160f;
+      --surface:#211f17;
+      --surface-2:#2a2820;
+      --fg:#efece2;
+      --fg-muted:#a39d8c;
+      --border:#3c392d;
+      --mono-fg:#ddd8c9;
+      --accent-in:#5fd4c4;
+      --accent-out:#e3a05f;
+      --accent-mid:#c9c4b2;
+      --generic:#dd9ae6;
+      --line:#78735f;
+      --line-strong:#efece2;
+      --line-label-bg:#17160f;
+      --removed:#ec8a7a;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17160f;
+    --surface:#211f17;
+    --surface-2:#2a2820;
+    --fg:#efece2;
+    --fg-muted:#a39d8c;
+    --border:#3c392d;
+    --mono-fg:#ddd8c9;
+    --accent-in:#5fd4c4;
+    --accent-out:#e3a05f;
+    --accent-mid:#c9c4b2;
+    --generic:#dd9ae6;
+    --line:#78735f;
+    --line-strong:#efece2;
+    --line-label-bg:#17160f;
+    --removed:#ec8a7a;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Inter',system-ui,sans-serif;
+    padding-left:max(16px, env(safe-area-inset-left,0px));
+    padding-right:max(16px, env(safe-area-inset-right,0px));
+    padding-block:28px 48px;
+  }
+  h1,h2,.card-title{font-family:'Space Grotesk','Inter',system-ui,sans-serif;}
+  .mono, .field, .lit{font-family:'JetBrains Mono','IBM Plex Mono',ui-monospace,monospace;}
+
+  .page{max-width:1240px;margin:0 auto;}
+  header.intro h1{font-size:1.7rem;margin:0 0 6px;letter-spacing:-0.01em;}
+  header.intro p{margin:0;color:var(--fg-muted);font-size:0.92rem;max-width:72ch;line-height:1.5;}
+  header.intro .pkg{color:var(--fg);font-weight:600;}
+
+  .legend{display:flex;flex-wrap:wrap;gap:12px 22px;margin:18px 0 6px;font-size:0.78rem;color:var(--fg-muted);}
+  .legend .item{display:flex;align-items:flex-start;gap:7px;max-width:100%;}
+  .legend .item .label{min-width:0;flex:1 1 auto;}
+  .swatch{width:13px;height:13px;border-radius:3px;flex:none;margin-top:2px;}
+  .swatch.in{background:var(--accent-in);}
+  .swatch.out{background:var(--accent-out);}
+  .swatch.mid{background:var(--accent-mid);}
+  .stroke{width:22px;flex:none;margin-top:8px;border-top:1.4px solid var(--line);}
+  .stroke.strong{border-top:2.2px solid var(--line-strong);margin-top:7px;}
+
+  .scrollwrap{overflow-x:auto; padding-bottom:12px; margin-top:10px;}
+  .diagram-wrap{
+    position:relative; min-width:1190px;
+    display:grid; grid-template-columns:270px 330px 330px; column-gap:120px; row-gap:34px;
+    align-items:start; justify-content:center; padding:10px 10px 20px;
+  }
+  .col-head{font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; font-weight:600; align-self:end;}
+  .col-head.mid{color:var(--accent-mid);} .col-head.in{color:var(--accent-in);} .col-head.out{color:var(--accent-out);}
+  .c1{grid-column:1;} .c2{grid-column:2;} .c3{grid-column:3;}
+  .r0{grid-row:1;} .r1{grid-row:2;} .r2{grid-row:3;} .r3{grid-row:4;} .r4{grid-row:5;}
+  .stack{display:flex; flex-direction:column; gap:22px;}
+
+  svg.edges{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible;}
+  svg.edges text{font-family:'JetBrains Mono',ui-monospace,monospace; font-size:11px; fill:var(--fg-muted);}
+  svg.edges text.strong{fill:var(--fg); font-weight:700;}
+  svg.edges rect.label-bg{fill:var(--line-label-bg);}
+  svg.edges path.edge{fill:none; stroke:var(--line); stroke-width:1.4;}
+  svg.edges path.edge.strong{stroke:var(--line-strong); stroke-width:2.2;}
+
+  .card{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px 14px 13px; box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .card.union{border-style:dashed;}
+  .card-head{display:flex; align-items:baseline; gap:7px; flex-wrap:wrap; margin-bottom:8px; padding-bottom:7px; border-bottom:1px solid var(--border);}
+  .card-title{font-size:0.95rem; font-weight:600; letter-spacing:-0.01em;}
+  .card.in .card-title{color:var(--accent-in);}
+  .card.out .card-title{color:var(--accent-out);}
+  .card.mid .card-title{color:var(--accent-mid);}
+  .generics{font-size:0.72rem; color:var(--generic); font-style:italic;}
+  .kind-tag{margin-left:auto; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--fg-muted); border:1px solid var(--border); border-radius:5px; padding:1px 6px;}
+  .derive-note{font-size:0.72rem; color:var(--fg-muted); margin:-2px 0 8px; font-style:italic;}
+
+  .field{display:flex; justify-content:space-between; gap:10px; font-size:0.74rem; line-height:1.55; white-space:nowrap;}
+  .fname{color:var(--fg);}
+  .fname.opt{color:var(--fg-muted);}
+  .ftype{color:var(--mono-fg); text-align:right; overflow:hidden; text-overflow:ellipsis;}
+  .ftype.generic{color:var(--generic);}
+  .ftype.ref{color:var(--accent-mid); font-weight:600;}
+  .ftype.ref.inref{color:var(--accent-in);}
+  .ftype.ref.outref{color:var(--accent-out);}
+
+  .union-label{font-size:0.66rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--fg-muted); margin-bottom:8px;}
+  .variant{border-top:1px solid var(--border); padding-top:8px; margin-top:8px;}
+  .variant.first{border-top:none; padding-top:0; margin-top:0;}
+  .variant-head{margin-bottom:5px;}
+  .variant-chip{font-size:0.65rem; font-weight:700; padding:1px 7px; border-radius:999px; background:var(--surface-2); color:var(--fg);}
+  .subgroup{border:1px dashed var(--border); border-radius:7px; padding:8px 9px 8px; margin-bottom:2px;}
+  .subgroup-label{font-size:0.66rem; color:var(--fg-muted); margin-bottom:7px; font-weight:600;}
+  .note{font-size:0.68rem; color:var(--fg-muted); margin-top:7px; font-style:italic;}
+
+  .enums{display:flex; flex-wrap:wrap; gap:10px 12px; align-items:center; margin:22px 0 0; font-size:0.72rem;}
+  .enums .enum-label{font-size:0.66rem; color:var(--fg-muted); text-transform:uppercase; letter-spacing:0.05em; flex-basis:100%;}
+  .enum-card{background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:7px 10px; max-width:100%;}
+  .enum-card .ename{font-weight:700; color:var(--fg); margin-right:8px;}
+  .enum-card .evals{color:var(--mono-fg);}
+
+  section.changes{margin-top:34px; border-top:1px solid var(--border); padding-top:20px;}
+  section.changes h2{font-size:1.05rem; margin:0 0 12px;}
+  .tally{display:flex; flex-wrap:wrap; gap:10px 28px; margin-bottom:16px; font-size:0.85rem; color:var(--fg-muted);}
+  .tally b{color:var(--fg); font-variant-numeric:tabular-nums;}
+  .change-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(270px, 1fr)); gap:14px 28px;}
+  .change-grid > div{min-width:0;}
+  .change-grid h3{font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--fg-muted); margin:0 0 6px; font-family:'Inter',system-ui,sans-serif; font-weight:600;}
+  .change-grid ul{margin:0; padding-left:18px; font-size:0.8rem; line-height:1.6; color:var(--fg-muted);}
+  .change-grid li{overflow-wrap:anywhere;}
+  .change-grid .mono{font-size:0.74rem; color:var(--fg);}
+  .change-grid .gone{color:var(--removed); text-decoration:line-through;}
+</style>
+
+<div class="page">
+  <header class="intro">
+    <h1>Simplified Basemap Types</h1>
+    <p>The basemap model in <span class="pkg">@map-colonies/types</span> after simplification. The <b style="color:var(--accent-in)">write model</b> is now the only place fields are declared. The <b style="color:var(--accent-out)">read model</b> no longer repeats them: each read type extends its write counterpart and swaps one field, and a read source is just a write source plus its resolution status. Runtime schemas for the read model come from three factories that take the caller's layer and capabilities schemas.</p>
+  </header>
+
+  <div class="legend">
+    <div class="item"><span class="swatch in"></span><span class="label">Write model (declares the fields)</span></div>
+    <div class="item"><span class="swatch out"></span><span class="label">Read model (shows only what it adds or replaces)</span></div>
+    <div class="item"><span class="swatch mid"></span><span class="label">Shared supporting type</span></div>
+    <div class="item"><span class="stroke strong"></span><span class="label">extends: inherits every field</span></div>
+    <div class="item"><span class="stroke"></span><span class="label">field reference</span></div>
+    <div class="item"><span class="label"><span style="color:var(--generic); font-style:italic;">TLayer / TCapabilities</span> = caller-supplied generics</span></div>
+  </div>
+
+  <div class="scrollwrap">
+    <div class="diagram-wrap" id="wrap">
+      <svg class="edges" id="svg"><defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--line)"></path>
+        </marker>
+        <marker id="arrow-strong" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="var(--line-strong)"></path>
+        </marker>
+      </defs></svg>
+
+      <div class="col-head mid c1 r0">Shared types</div>
+      <div class="col-head in c2 r0">Write model</div>
+      <div class="col-head out c3 r0">Read model</div>
+
+      <!-- row 1 -->
+      <div class="card in c2 r1" id="in-persisted">
+        <div class="card-head"><span class="card-title">PersistedBasemap</span><span class="kind-tag">zod object</span></div>
+        <div class="derive-note">BasemapWriteInput, plus:</div>
+        <div class="field"><span class="fname">id</span><span class="ftype">string</span></div>
+      </div>
+
+      <div class="card out c3 r1" id="out-basemap">
+        <div class="card-head"><span class="card-title">Basemap</span><span class="generics">&lt;TLayer, TCapabilities&gt;</span><span class="kind-tag">interface</span></div>
+        <div class="derive-note">PersistedBasemap, with one field replaced:</div>
+        <div class="field"><span class="fname">layers</span><span class="ftype ref outref">BasemapLayerOutput[]</span></div>
+      </div>
+
+      <!-- row 2 -->
+      <div class="card mid c1 r2" id="mid-thumb">
+        <div class="card-head"><span class="card-title">BasemapThumbnail</span><span class="kind-tag">zod object</span></div>
+        <div class="field"><span class="fname">url</span><span class="ftype">string (non-empty)</span></div>
+        <div class="field"><span class="fname">width</span><span class="ftype lit">128</span></div>
+        <div class="field"><span class="fname">height</span><span class="ftype lit">128</span></div>
+      </div>
+
+      <div class="card in c2 r2" id="in-write">
+        <div class="card-head"><span class="card-title">BasemapWriteInput</span><span class="kind-tag">zod object</span></div>
+        <div class="field"><span class="fname">name</span><span class="ftype">string (non-empty)</span></div>
+        <div class="field"><span class="fname">thumbnail</span><span class="ftype ref">BasemapThumbnail</span></div>
+        <div class="field"><span class="fname">isCurrent</span><span class="ftype">boolean</span></div>
+        <div class="field"><span class="fname">isForPreview</span><span class="ftype">boolean</span></div>
+        <div class="field"><span class="fname">layers</span><span class="ftype ref inref">BasemapLayerInput[]</span></div>
+      </div>
+
+      <!-- row 3 -->
+      <div class="card in c2 r3" id="in-layer">
+        <div class="card-head"><span class="card-title">BasemapLayerInput</span><span class="kind-tag">zod object</span></div>
+        <div class="field"><span class="fname">id</span><span class="ftype">string</span></div>
+        <div class="field"><span class="fname">order</span><span class="ftype">int &ge; 0</span></div>
+        <div class="field"><span class="fname">opacity</span><span class="ftype">number 0&ndash;1</span></div>
+        <div class="field"><span class="fname opt">shouldBeUsedInModelDraping?</span><span class="ftype">boolean</span></div>
+        <div class="field"><span class="fname">source</span><span class="ftype ref inref">BasemapLayerSourceInput</span></div>
+      </div>
+
+      <div class="card out c3 r3" id="out-layer">
+        <div class="card-head"><span class="card-title">BasemapLayerOutput</span><span class="generics">&lt;TLayer, TCapabilities&gt;</span><span class="kind-tag">interface</span></div>
+        <div class="derive-note">BasemapLayerInput, with one field replaced:</div>
+        <div class="field"><span class="fname">source</span><span class="ftype ref outref">BasemapLayerSourceOutput</span></div>
+      </div>
+
+      <!-- row 4 -->
+      <div class="stack c1 r4">
+        <div class="card mid" id="mid-uniqueness">
+          <div class="card-head"><span class="card-title">RasterUniqueness</span><span class="kind-tag">zod object</span></div>
+          <div class="field"><span class="fname opt">productId?</span><span class="ftype">string | null</span></div>
+          <div class="field"><span class="fname opt">productType?</span><span class="ftype">string | null</span></div>
+        </div>
+        <div class="card mid" id="mid-details">
+          <div class="card-head"><span class="card-title">ExternalLayerDetails</span><span class="kind-tag">zod object</span></div>
+          <div class="field"><span class="fname">protocol</span><span class="ftype">string</span></div>
+          <div class="field"><span class="fname">name</span><span class="ftype">string (non-empty)</span></div>
+          <div class="field"><span class="fname">url</span><span class="ftype">string (non-empty)</span></div>
+          <div class="note">extra keys are kept (passthrough)</div>
+        </div>
+      </div>
+
+      <div class="card in union c2 r4" id="in-src">
+        <div class="card-head"><span class="card-title">BasemapLayerSourceInput</span><span class="kind-tag">union</span></div>
+        <div class="union-label">one of, told apart by type</div>
+        <div class="variant first" id="in-src-catalog">
+          <div class="variant-head"><span class="variant-chip">CatalogResourceLayerSource</span></div>
+          <div class="field"><span class="fname">type</span><span class="ftype lit">'CATALOG_RESOURCE'</span></div>
+          <div class="field"><span class="fname">domain</span><span class="ftype lit">'RASTER'</span></div>
+          <div class="field"><span class="fname">uniqueness</span><span class="ftype ref">RasterUniqueness</span></div>
+        </div>
+        <div class="variant" id="in-src-external">
+          <div class="variant-head"><span class="variant-chip">ExternalLayerSource</span></div>
+          <div class="field"><span class="fname">type</span><span class="ftype lit">'EXTERNAL'</span></div>
+          <div class="field"><span class="fname">details</span><span class="ftype ref">ExternalLayerDetails</span></div>
+        </div>
+      </div>
+
+      <div class="card out union c3 r4" id="out-src">
+        <div class="card-head"><span class="card-title">BasemapLayerSourceOutput</span><span class="generics">&lt;TLayer, TCapabilities&gt;</span><span class="kind-tag">union</span></div>
+        <div class="union-label">a write source plus its resolution status</div>
+        <div class="subgroup" id="out-src-catalog">
+          <div class="subgroup-label">CatalogResourceLayerSource, plus either:</div>
+          <div class="variant first">
+            <div class="field"><span class="fname">status</span><span class="ftype lit">'RESOLVED'</span></div>
+            <div class="field"><span class="fname">layer</span><span class="ftype generic">TLayer</span></div>
+            <div class="field"><span class="fname">capabilities</span><span class="ftype generic">TCapabilities</span></div>
+          </div>
+          <div class="variant">
+            <div class="field"><span class="fname">status</span><span class="ftype lit">'UNRESOLVED'</span></div>
+            <div class="field"><span class="fname">layer</span><span class="ftype lit">null</span></div>
+            <div class="field"><span class="fname">capabilities</span><span class="ftype lit">null</span></div>
+          </div>
+        </div>
+        <div class="variant" id="out-src-external">
+          <div class="subgroup-label">ExternalLayerSource, plus:</div>
+          <div class="field"><span class="fname">status</span><span class="ftype lit">'RESOLVED'</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="enums">
+    <div class="enum-label">Backing enums (unchanged)</div>
+    <div class="enum-card mono"><span class="ename">SourceType</span><span class="evals">CATALOG_RESOURCE &middot; EXTERNAL</span></div>
+    <div class="enum-card mono"><span class="ename">Domain</span><span class="evals">DEM &middot; RASTER &middot; _3D</span></div>
+    <div class="enum-card mono"><span class="ename">ResourceResolutionStatus</span><span class="evals">RESOLVED &middot; UNRESOLVED</span></div>
+  </div>
+
+  <section class="changes">
+    <h2>What changed from master</h2>
+    <div class="tally">
+      <span>Exported names <b>32 &rarr; 24</b></span>
+      <span>Schema factories <b>5 &rarr; 3</b></span>
+      <span>Source lines <b>210 &rarr; 127</b></span>
+      <span>JSON shape on the wire <b>unchanged</b></span>
+    </div>
+    <div class="change-grid">
+      <div>
+        <h3>Removed (now inline in BasemapLayerSourceOutput)</h3>
+        <ul>
+          <li><span class="mono gone">ResolvedCatalogResourceLayerSource</span></li>
+          <li><span class="mono gone">UnresolvedCatalogResourceLayerSource</span> and its schema</li>
+          <li><span class="mono gone">CatalogResourceLayerSourceOutput</span></li>
+          <li><span class="mono gone">ExternalLayerSourceOutput</span> and its schema</li>
+          <li><span class="mono gone">createResolvedCatalogResourceLayerSourceSchema</span></li>
+          <li><span class="mono gone">createCatalogResourceLayerSourceOutputSchema</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Renamed</h3>
+        <ul>
+          <li><span class="mono gone">ExternalLayerSourceInput</span> &rarr; <span class="mono">ExternalLayerSource</span> (type and schema), matching <span class="mono">CatalogResourceLayerSource</span></li>
+        </ul>
+        <h3 style="margin-top:14px;">Kept</h3>
+        <ul>
+          <li><span class="mono">createBasemapSchema</span>, <span class="mono">createBasemapLayerOutputSchema</span>, <span class="mono">createBasemapLayerSourceOutputSchema</span></li>
+          <li>Every write-model schema and type, and all three enums</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Defined once instead of twice</h3>
+        <ul>
+          <li>Layer fields (<span class="mono">id, order, opacity, shouldBeUsedInModelDraping</span>)</li>
+          <li>Basemap fields (<span class="mono">name, thumbnail, isCurrent, isForPreview</span>)</li>
+          <li>The catalog-resource source (was written out four times)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var wrap = document.getElementById('wrap');
+  var svg = document.getElementById('svg');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var edges = [
+    {from:'in-persisted', to:'in-write', label:'extends', strong:true},
+    {from:'in-write', to:'in-layer', label:'layers[]'},
+    {from:'in-write', to:'mid-thumb', label:'thumbnail'},
+    {from:'in-layer', to:'in-src', label:'source'},
+    {from:'in-src-catalog', to:'mid-uniqueness', label:'uniqueness'},
+    {from:'in-src-external', to:'mid-details', label:'details'},
+
+    {from:'out-basemap', to:'in-persisted', label:'extends', strong:true},
+    {from:'out-basemap', to:'out-layer', label:'layers[]'},
+    {from:'out-layer', to:'in-layer', label:'extends', strong:true},
+    {from:'out-layer', to:'out-src', label:'source'},
+    {from:'out-src-catalog', to:'in-src-catalog', label:'extends', strong:true},
+    {from:'out-src-external', to:'in-src-external', label:'extends', strong:true}
+  ];
+
+  function rel(el, base){
+    var r = el.getBoundingClientRect();
+    var card = (el.closest('.card') || el).getBoundingClientRect();
+    return {left:card.left-base.left, top:r.top-base.top, right:card.right-base.left, bottom:r.bottom-base.top,
+            cx:r.left-base.left+r.width/2, cy:r.top-base.top+r.height/2};
+  }
+  function pointOnSide(r, side){
+    if(side==='left') return {x:r.left, y:r.cy};
+    if(side==='right') return {x:r.right, y:r.cy};
+    if(side==='top') return {x:r.cx, y:r.top};
+    return {x:r.cx, y:r.bottom};
+  }
+
+  function draw(){
+    try{
+      while(svg.childNodes.length>1){ svg.removeChild(svg.lastChild); }
+      var base = wrap.getBoundingClientRect();
+      svg.setAttribute('viewBox','0 0 '+base.width+' '+base.height);
+
+      edges.forEach(function(e){
+        var fromEl = document.getElementById(e.from), toEl = document.getElementById(e.to);
+        if(!fromEl || !toEl) return;
+        var a = rel(fromEl, base), b = rel(toEl, base);
+        var horizontal = (a.right < b.left) || (b.right < a.left);
+        var fromSide, toSide;
+        if(horizontal){
+          fromSide = b.cx > a.cx ? 'right' : 'left';
+          toSide = b.cx > a.cx ? 'left' : 'right';
+        } else {
+          fromSide = b.cy > a.cy ? 'bottom' : 'top';
+          toSide = b.cy > a.cy ? 'top' : 'bottom';
+        }
+        var p1 = pointOnSide(a, fromSide), p2 = pointOnSide(b, toSide);
+        var c1x = p1.x, c1y = p1.y, c2x = p2.x, c2y = p2.y;
+        if(horizontal){ c1x = c2x = (p1.x+p2.x)/2; } else { c1y = c2y = (p1.y+p2.y)/2; }
+
+        var path = document.createElementNS(NS,'path');
+        path.setAttribute('class', e.strong ? 'edge strong' : 'edge');
+        path.setAttribute('d', 'M '+p1.x+' '+p1.y+' C '+c1x+' '+c1y+', '+c2x+' '+c2y+', '+p2.x+' '+p2.y);
+        path.setAttribute('marker-end', e.strong ? 'url(#arrow-strong)' : 'url(#arrow)');
+        svg.appendChild(path);
+
+        var midX = (p1.x+p2.x)/2, midY = (p1.y+p2.y)/2;
+        var w = e.label.length*6.8 + 8;
+        var rect = document.createElementNS(NS,'rect');
+        rect.setAttribute('class','label-bg');
+        rect.setAttribute('x', midX - w/2); rect.setAttribute('y', midY - 8);
+        rect.setAttribute('width', w); rect.setAttribute('height', 16); rect.setAttribute('rx', 3);
+        var text = document.createElementNS(NS,'text');
+        if(e.strong) text.setAttribute('class','strong');
+        text.setAttribute('x', midX); text.setAttribute('y', midY + 4);
+        text.setAttribute('text-anchor','middle');
+        text.textContent = e.label;
+        svg.appendChild(rect); svg.appendChild(text);
+      });
+    }catch(err){}
+  }
+
+  draw();
+  window.addEventListener('resize', function(){ setTimeout(draw, 50); });
+  window.addEventListener('load', function(){ setTimeout(draw, 50); });
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ setTimeout(draw, 30); }); }
+  setTimeout(draw, 300);
+})();
+</script>
