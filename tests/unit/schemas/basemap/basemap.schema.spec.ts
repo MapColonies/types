@@ -1,6 +1,8 @@
+import { z } from 'zod';
 import { Domain } from '../../../../src/enums/common/domain';
 import { SourceType } from '../../../../src/enums/common/metadata/sourceType';
-import { BasemapWriteInputSchema, PersistedBasemapSchema } from '../../../../src/schemas/basemap/basemap.schema';
+import { ResourceResolutionStatus } from '../../../../src/enums/basemap/resourceResolutionStatus';
+import { BasemapWriteInputSchema, PersistedBasemapSchema, createBasemapSchema } from '../../../../src/schemas/basemap/basemap.schema';
 
 function baseInput(): Record<string, unknown> {
   return {
@@ -73,5 +75,38 @@ describe('PersistedBasemapSchema', () => {
 
   it('rejects a persisted entry missing its id', () => {
     expect(PersistedBasemapSchema.safeParse(baseInput()).success).toBe(false);
+  });
+});
+
+describe('createBasemapSchema', () => {
+  const schema = createBasemapSchema(z.object({ id: z.string() }), z.object({ id: z.string() }));
+
+  function resolvedBasemap(): Record<string, unknown> {
+    const [catalogLayer, externalLayer] = baseInput().layers as { source: Record<string, unknown> }[];
+    return {
+      ...baseInput(),
+      id: 'generated-id',
+      layers: [
+        {
+          ...catalogLayer,
+          source: { ...catalogLayer.source, status: ResourceResolutionStatus.RESOLVED, layer: { id: 'record-1' }, capabilities: { id: 'cap-1' } },
+        },
+        { ...externalLayer, source: { ...externalLayer.source, status: ResourceResolutionStatus.RESOLVED } },
+      ],
+    };
+  }
+
+  it('accepts a persisted basemap whose layer sources are resolved', () => {
+    expect(schema.safeParse(resolvedBasemap()).success).toBe(true);
+  });
+
+  it('rejects a persisted basemap whose layer sources were never resolved', () => {
+    expect(schema.safeParse({ ...baseInput(), id: 'generated-id' }).success).toBe(false);
+  });
+
+  it('keeps the write-side layer constraints', () => {
+    const [firstLayer, secondLayer] = resolvedBasemap().layers as Record<string, unknown>[];
+    const input = { ...resolvedBasemap(), layers: [{ ...firstLayer, opacity: 1.5 }, secondLayer] };
+    expect(schema.safeParse(input).success).toBe(false);
   });
 });
