@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.5](https://github.com/MapColonies/types/compare/v1.12.4...v1.12.5) (2026-11-11)
+
+
+### Bug Fixes
+
+* remove basemap types ([#50](https://github.com/MapColonies/types/issues/50)) ([7a58930](https://github.com/MapColonies/types/commit/7a589309f1dc280be839234d57b682de80b04489))
+
 ## [1.12.4](https://github.com/MapColonies/types/compare/v1.12.3...v1.12.4) (2026-11-10)
 
 
