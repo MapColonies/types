@@ -1,4 +1,3 @@
-export * from './enums/basemap/resourceResolutionStatus';
 export * from './enums/common/domain';
 export * from './enums/common/artifact';
 export * from './enums/common/metadata/linkType';
@@ -6,10 +5,8 @@ export * from './enums/common/metadata/productType';
 export * from './enums/common/metadata/protocolType';
 export * from './enums/common/metadata/recordStatus';
 export * from './enums/common/metadata/recordType';
-export * from './enums/common/metadata/sourceType';
 export * from './enums/common/metadata/transparency';
 export * from './enums/geo/epsg';
 export * from './helpers/mime';
 export * from './types/countryTranslation';
 export * from './interfaces';
-export * from './schemas';
